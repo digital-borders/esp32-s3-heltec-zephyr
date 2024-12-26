@@ -1,0 +1,84 @@
+menu "MQTT configuration"
+
+config MQTT_SUB_TOPIC
+	string "MQTT subscribe topic"
+	default "digital-borders/subscribe/topic1"
+
+config MQTT_BROKER_HOSTNAME
+	string "MQTT broker hostname"
+	default "test.mosquitto.org"
+
+config MQTT_BROKER_PORT
+	int "MQTT broker port"
+	default 1883
+
+config MQTT_MESSAGE_BUFFER_SIZE
+	int "MQTT message buffer size"
+	default 512
+
+config MQTT_PAYLOAD_BUFFER_SIZE
+	int "MQTT payload buffer size"
+	default 512
+
+config MQTT_RECONNECT_WAIT_S
+	int "Seconds to wait before attempting to reconnect to the broker."
+	default 5
+
+config MQTT_NET_POLL_INTERVAL_MS
+	int "Polling interval in milliseconds."
+	default 1000
+
+config MQTT_PUBLISH_INTERVAL_S
+	int "Seconds between MQTT publications"
+	default 10
+
+config MQTT_USERNAME
+	string "The username used to login"
+	default ""
+
+config MQTT_PASSWORD
+	string "The password used to login"
+	default ""
+
+config MQTT_MAXIMUM_SUBSCRIPTIONS
+	int "The maximum number of subscriptions"
+	default 4
+
+config MQTT_MAXIMUM_TOPIC_NAME_LENGTH
+	int "The maximum length of a topic name"
+	default 128
+
+config MQTT_MAXIMUM_TOPIC_SLICES
+	int "The maximum number of topic slices"
+	default 10
+
+config SENSORS_TEMPERATURE_FREQUENCY
+	int "Indicate how many milliseconds between temperature readings"
+	default 10000
+
+config SENSORS_HUMIDITY_FREQUENCY
+	int "Indicate how many milliseconds between humidity readings"
+	default 10000
+
+config SENSORS_PRESSURE_FREQUENCY
+	int "Indicate how many milliseconds between pressure readings"
+	default 10000
+
+config SENSORS_CO_FREQUENCY
+	int "Indicate how many milliseconds between co readings"
+	default 10000
+
+config SENSORS_WATER_LEVEL_FREQUENCY
+	int "Indicate how many milliseconds between co readings"
+	default 10000
+
+config CONTROLLER_FREQUENCY
+	int "Indicate how many milliseconds between controller thread runs"
+	default 1000
+
+config RTC_FREQUENCY
+	int "Indicate how many milliseconds between RTC updates"
+	default 1000
+endmenu
+
+source "Kconfig.zephyr"

@@ -1,0 +1,16 @@
+{
+  "actions": [
+    {
+      "start": 1730801942,
+      "end": 1764929942,
+      "sensorId": 1,
+      "triggerType": 0,
+      "actionType": 0,
+      "actuatorId": 0,
+      "activationTime": 10,
+      "interval": 30,
+      "amount": 60
+    }
+  ],
+  "num_elements": 1
+}

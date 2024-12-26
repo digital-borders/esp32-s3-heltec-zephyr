@@ -1,0 +1,10 @@
+description: GPIO pin to switch a relay on or off
+
+compatible: "relay"
+
+properties:
+  gpios:
+    type: phandle-array
+    required: true
+    description: |
+      The GPIO connected to the relay driving transistor.

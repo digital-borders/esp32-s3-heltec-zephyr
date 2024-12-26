@@ -1,0 +1,162 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    // Hush CMake
+    "cmake.configureOnOpen": false,
+
+    // IntelliSense
+    "C_Cpp.default.compilerPath": "${userHome}/zephyr-sdk-0.16.8/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc",
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+
+    // File Associations
+    "files.associations": {
+      "log.h": "c",
+      "mqtt.h": "c",
+      "sensors.h": "c",
+      "stdint.h": "c",
+      "zbus.h": "c",
+      "device.h": "c",
+      "devicetree.h": "c",
+      "vl53l0x.h": "c",
+      "algorithm": "c",
+      "functional": "c",
+      "optional": "c",
+      "regex": "c",
+      "system_error": "c",
+      "type_traits": "c",
+      "xtr1common": "c",
+      "xutility": "c",
+      "bme280.h": "c",
+      "net_event.h": "c",
+      "humidity.h": "c",
+      "water_level.h": "c",
+      "app_config.h": "c",
+      "temperature.h": "c",
+      "app_status.h": "c",
+      "net_if.h": "c",
+      "wifi.h": "c",
+      "socket.h": "c",
+      "config_wifi.h": "c",
+      "kernel.h": "c",
+      "ble_zbus.h": "c",
+      "sstream": "c",
+      "gpio.h": "c",
+      "water_valve.h": "c",
+      "water_pump.h": "c",
+      "stdbool.h": "c",
+      "mqtt_client.h": "c",
+      "random.h": "c",
+      "xlocale": "c",
+      "wifi_mgmt.h": "c",
+      "mqtt_zbus.h": "c"
+    }
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "West Build",
+        "type": "shell",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "command": "${workspaceFolder}/.venv/Scripts/west",
+        "args": ["build", "app", "-p", "auto", "-b", "heltec_wifi_lora32_v3/esp32s3/procpu"],
+        "problemMatcher": ["$gcc"]
+      },
+      {
+        "label": "West Build Trace",
+        "type": "shell",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "command": "${workspaceFolder}/.venv/Scripts/west",
+        "args": ["build", "app", "-p", "auto", "-b", "heltec_wifi_lora32_v3/esp32s3/procpu", "-DCONFIG_THREAD_ANALYZER=y", "-DCONFIG_THREAD_ANALYZER_USE_PRINTK=y", "-DCONFIG_THREAD_ANALYZER_AUTO=y", "-DCONFIG_THREAD_ANALYZER_AUTO_INTERVAL=5"],
+        "problemMatcher": ["$gcc"]
+      },
+      {
+        "label": "West Configurable Build",
+        "type": "shell",
+        "group": {
+          "kind": "build"
+        },
+        "command": "${workspaceFolder}/.venv/Scripts/west",
+        "args": ["build", "app", "-p", "${input:pristine}", "-b", "${input:board}"],
+        "problemMatcher": ["$gcc"]
+      },
+      {
+        "label": "West Flash",
+        "type": "shell",
+        "command": "${workspaceFolder}/.venv/Scripts/west",
+        "args": ["flash", "--esp-device=${input:com}"],
+        "problemMatcher": ["$gcc"]
+      }
+    ],
+    "inputs": [
+      {
+        "id": "board",
+        "type": "promptString",
+        "default": "heltec_wifi_lora32_v3/esp32s3/procpu",
+        "description": "See https://docs.zephyrproject.org/latest/boards/index.html"
+      },
+      {
+        "id": "pristine",
+        "type": "pickString",
+        "description": "Choose when to run a pristine build",
+        "default": "always",
+        "options": ["auto", "always", "never"]
+      },
+      {
+        "id": "com",
+        "type": "pickString",
+        "description": "Select the COM port for flashing",
+        "default": "COM5",
+        "options": ["COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "COM10"]
+      }
+    ]
+  },
+  //   "launch": {
+  //     "version": "0.2.0",
+  //     "configurations": [
+  //       {
+  //         "name": "Launch",
+  //         "device": "nRF52840_xxAA",
+  //         "cwd": "${workspaceFolder}",
+  //         "executable": "build/zephyr/zephyr.elf",
+  //         "request": "launch",
+  //         "type": "cortex-debug",
+  //         "runToEntryPoint": "main",
+  //         "servertype": "jlink",
+  //         "gdbPath": "${userHome}/zephyr-sdk-0.16.8/arm-zephyr-eabi/bin/arm-zephyr-eabi-gdb",
+  //         "preLaunchTask": "West Build"
+  //       },
+  //       {
+  //         "name": "Attach",
+  //         "device": "nRF52840_xxAA",
+  //         "cwd": "${workspaceFolder}",
+  //         "executable": "build/zephyr/zephyr.elf",
+  //         "request": "attach",
+  //         "type": "cortex-debug",
+  //         "runToEntryPoint": "main",
+  //         "servertype": "jlink",
+  //         "gdbPath": "${userHome}/zephyr-sdk-0.16.8/arm-zephyr-eabi/bin/arm-zephyr-eabi-gdb"
+  //       }
+  //     ]
+  //   },
+  "extensions": {
+    "recommendations": [
+      "ms-vscode.cpptools-extension-pack",
+      "ms-python.python",
+      "ms-vscode.vscode-embedded-tools",
+      "ms-vscode.vscode-serial-monitor",
+      "marus25.cortex-debug",
+      "donjayamanne.python-environment-manager"
+    ]
+  }
+}

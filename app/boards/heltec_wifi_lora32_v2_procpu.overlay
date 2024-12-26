@@ -1,0 +1,26 @@
+/ {
+    pumprelay: pumprelay {
+        compatible = "relay";
+        gpios = <&gpio0 14 GPIO_ACTIVE_HIGH>;
+    };
+
+	aliases {
+		pumprelay = &pumprelay;
+	};
+};
+
+&wifi {
+    status = "okay";
+};
+
+&i2c0 {
+    status = "okay";
+    
+    bme280: bme280@76 {
+        /* 0x76 - SDO <-> GND */
+		/* 0x77 - SDO <-> VCC */
+        compatible = "bosch,bme280";
+        reg = <0x76>;
+        status = "okay";
+    };
+};

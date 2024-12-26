@@ -1,0 +1,29 @@
+manifest:
+  version: 0.8
+
+  defaults:
+    remote: zephyrproject
+  remotes:
+    - name: zephyrproject
+      url-base: https://github.com/zephyrproject-rtos
+  projects:
+    - name: zephyr
+      repo-path: zephyr
+      revision: v4.0.0
+      import:
+        file: west.yml
+        path-prefix: deps
+        name-allowlist:
+          - cmsis
+          - hal_espressif
+          - mbedtls
+          - hal_st
+          - tinycrypt
+
+    - name: ds3231-driver-zephyr
+      path: deps/modules/lib/ds3231-driver-zephyr
+      revision: main
+      url: https://github.com/digital-borders/ds3231-driver-zephyr.git
+
+  self:
+    path: app
